@@ -10,12 +10,13 @@ function setupStorySection() {
   const storySteps = storyContainer.querySelectorAll(".story-step");
   const candidateScreen = document.getElementById("candidate-screen");
   const employerScreen = document.getElementById("employer-screen");
-  const connector = storyContainer.querySelector(".story-connector");
+  const actionHub = document.getElementById("action-hub");
+  const actionIcon = document.getElementById("action-icon");
+  const backgroundGlow = document.getElementById("story-background-glow");
 
   // --- IMPORTANT ---
   // 1. Create an 'images' folder next to your html file.
   // 2. Place all your screenshot files in that 'images' folder.
-  // 3. The paths below should now work correctly.
   const imagePaths = {
     emp_dash: "images/Screenshot_20251002_114127_ShiftSureEmployer.jpeg",
     emp_add_shift: "images/Screenshot_20251002_114201_ShiftSureEmployer.jpeg",
@@ -31,20 +32,21 @@ function setupStorySection() {
       "images/Screenshot_20251002_115920_ShiftSure_Prod.jpeg",
     can_hired_status: "images/Screenshot_20251002_120005_ShiftSure_Prod.jpeg",
     can_calendar: "images/Screenshot_20251002_120021_ShiftSure_Prod.jpeg",
-
-    // NOTE: I will generate mockups for these if you need them. For now, they are blank.
-    mock_can_notification: "",
-    mock_emp_notification: "",
   };
 
-  // Preload images for smooth transitions
+  // Preload images
   Object.values(imagePaths).forEach((path) => {
     if (path) {
-      // Only preload if path is not empty
-      const img = new Image();
-      img.src = path;
+      new Image().src = path;
     }
   });
+
+  const getNotificationHTML = (title, message) => `
+    <div class="mock-notification">
+        <img class="app-icon" src="images/app-icon.png" alt="App Icon">
+        <strong>${title}</strong>
+        <p>${message}</p>
+    </div>`;
 
   const storyData = [
     {
@@ -52,83 +54,107 @@ function setupStorySection() {
       focus: "employer",
       employerImg: imagePaths.emp_add_shift,
       candidateImg: "",
-      connectorActive: false,
+      icon: "fa-magnifying-glass",
+      glow: "right",
+      line: "",
     },
     {
       step: 2,
       focus: "employer",
       employerImg: imagePaths.emp_post_job,
       candidateImg: "",
-      connectorActive: true,
+      icon: "fa-paper-plane",
+      glow: "right",
+      line: "line-right",
     },
     {
       step: 3,
       focus: "candidate",
       employerImg: imagePaths.emp_post_job,
-      candidateImg: imagePaths.can_job_details,
-      connectorActive: false,
+      candidateImg: "mock-notification",
+      icon: "fa-bell",
+      glow: "left",
+      line: "line-left",
     },
     {
       step: 4,
       focus: "candidate",
       employerImg: "",
       candidateImg: imagePaths.can_apply,
-      connectorActive: true,
+      icon: "fa-file-arrow-up",
+      glow: "left",
+      line: "line-left",
     },
     {
       step: 5,
       focus: "employer",
       employerImg: imagePaths.emp_review,
       candidateImg: imagePaths.can_apply,
-      connectorActive: false,
+      icon: "fa-magnifying-glass-chart",
+      glow: "right",
+      line: "line-right",
     },
     {
       step: 6,
       focus: "employer",
       employerImg: imagePaths.emp_schedule,
       candidateImg: imagePaths.can_interview_status,
-      connectorActive: false,
+      icon: "fa-calendar-days",
+      glow: "right",
+      line: "line-right",
     },
     {
       step: 7,
       focus: "employer",
       employerImg: imagePaths.emp_confirm_hire,
       candidateImg: "",
-      connectorActive: false,
+      icon: "fa-handshake",
+      glow: "right",
+      line: "line-right",
     },
     {
       step: 8,
       focus: "candidate",
-      employerImg: imagePaths.emp_confirm_hire,
+      employerImg: "",
       candidateImg: imagePaths.can_calendar,
-      connectorActive: false,
+      icon: "fa-circle-check",
+      glow: "left",
+      line: "",
     },
   ];
+
+  let currentIcon = "";
 
   const updateVisuals = (stepIndex) => {
     const data = storyData.find((d) => d.step === stepIndex);
     if (!data) return;
 
-    storyVisuals.className = "story-visuals"; // Reset
-    storyVisuals.classList.add(`focus-${data.focus}`);
+    // Update Focus and Glow
+    storyVisuals.className = `story-visuals focus-${data.focus}`;
+    backgroundGlow.className = data.glow ? `glow-${data.glow}` : "";
 
-    if (data.employerImg) {
+    // Update Screens
+    if (data.employerImg)
       employerScreen.style.backgroundImage = `url('${data.employerImg}')`;
-      employerScreen.classList.add("is-visible");
-    } else {
-      employerScreen.classList.remove("is-visible");
-    }
-    if (data.candidateImg) {
+    if (data.candidateImg === "mock-notification") {
+      candidateScreen.innerHTML = getNotificationHTML(
+        "New Job Match!",
+        "A Dental Specialist position is available at Toronto Red Cross."
+      );
+      candidateScreen.style.backgroundImage = ""; // Clear BG image
+    } else if (data.candidateImg) {
+      candidateScreen.innerHTML = ""; // Clear inner HTML
       candidateScreen.style.backgroundImage = `url('${data.candidateImg}')`;
-      candidateScreen.classList.add("is-visible");
-    } else {
-      candidateScreen.classList.remove("is-visible");
     }
 
-    if (data.connectorActive) {
-      connector.classList.add("is-active");
-    } else {
-      connector.classList.remove("is-active");
+    // Update Action Hub Icon and Lines
+    actionHub.className = data.line || "";
+    if (data.icon !== currentIcon) {
+      actionIcon.classList.remove("is-active");
+      setTimeout(() => {
+        actionIcon.className = `fa-solid ${data.icon} is-active`;
+        currentIcon = data.icon;
+      }, 250); // Wait for fade out before changing
     }
   };
 
@@ -144,7 +170,7 @@ function setupStorySection() {
         }
       });
     },
-    { threshold: 0.6 } // When 60% of the step is visible
+    { threshold: 0.6 }
   );
 
   storySteps.forEach((step) => observer.observe(step));

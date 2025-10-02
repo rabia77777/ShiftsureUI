@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="story.css" />
   </head>
   <body>
+    <div id="story-background-glow"></div>
+
     <main>
       <section id="story" class="section">
         <div class="container">
@@ -29,31 +31,31 @@
                 <h3><strong>1. Urgent Need Arises</strong></h3>
                 <p>
                   Jane Doe, a manager at Toronto Red Cross, needs to fill a
-                  critical Dental Specialist shift for next week. She opens the
-                  ShiftSure Employer App.
+                  critical Dental Specialist shift. She opens the ShiftSure
+                  Employer App.
                 </p>
               </div>
               <div class="story-step" data-step="2">
                 <h3><strong>2. Post in Seconds</strong></h3>
                 <p>
-                  She quickly enters the job details, schedule, and
-                  requirements. The intuitive form makes posting a new shift
-                  effortless.
+                  She quickly enters the job details and schedule. With a single
+                  tap, the job is live and sent to the ShiftSure network.
                 </p>
               </div>
               <div class="story-step" data-step="3">
                 <h3><strong>3. AI Finds the Match</strong></h3>
                 <p>
-                  The moment the shift is posted, our AI scans thousands of
-                  profiles. A notification is instantly sent to John Doe, a
-                  top-rated local specialist.
+                  Our AI instantly scans thousands of profiles. A notification
+                  is sent to John Doe, a top-rated local specialist whose
+                  credentials and availability are a perfect match.
                 </p>
               </div>
               <div class="story-step" data-step="4">
                 <h3><strong>4. One-Tap Application</strong></h3>
                 <p>
-                  John reviews the details and competitive pay. Seeing it's a
-                  perfect fit, he submits his verified resume with a single tap.
+                  John reviews the details and competitive pay. He submits his
+                  verified resume with a single tap, sending his application
+                  back to the employer.
                 </p>
               </div>
               <div class="story-step" data-step="5">
@@ -68,22 +70,23 @@
                 <h3><strong>6. Seamless Interviewing</strong></h3>
                 <p>
                   Impressed, Jane schedules an in-person interview directly
-                  through the app. John is notified and confirms the time.
+                  through the app. The invite is sent to John instantly.
                 </p>
               </div>
               <div class="story-step" data-step="7">
                 <h3><strong>7. The Hire</strong></h3>
                 <p>
                   After a successful interview, Jane hires John with one click.
-                  All paperwork and compliance are handled automatically.
+                  The official offer and shift booking are confirmed through the
+                  platform.
                 </p>
               </div>
               <div class="story-step" data-step="8">
                 <h3><strong>8. Problem Solved</strong></h3>
                 <p>
-                  The shift is filled. John sees his application status updated
-                  to "Hired" and checks his schedule. The entire process took
-                  just minutes.
+                  The shift is filled. John sees the confirmed shift appear in
+                  his calendar, ready to go. The entire process took just
+                  minutes.
                 </p>
               </div>
             </div>
@@ -94,10 +97,12 @@
                 </div>
                 <strong>Candidate</strong>
               </div>
-              <div class="story-connector">
-                <div class="connector-line"></div>
-                <i class="fa-solid fa-bolt-lightning"></i>
-                <div class="connector-line"></div>
+              <div id="action-hub">
+                <div class="action-line" id="line-left"></div>
+                <div class="action-icon-container">
+                  <i id="action-icon" class="fa-solid"></i>
+                </div>
+                <div class="action-line" id="line-right"></div>
               </div>
               <div class="device-col">
                 <div class="device-mockup employer">
