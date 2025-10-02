@@ -70,9 +70,23 @@ i {
   opacity: 1;
   transform: translateY(0);
 }
+/* --- Corrected Logo Styling --- */
+.logo {
+  display: flex; /* This is the key! It makes the logo a flex container. */
+  align-items: center; /* This vertically centers the text and image. */
+  gap: 0.75rem;
+  text-decoration: none;
+  color: #fff; /* Ensures the text color is white */
+}
+
 .logo img {
   height: 68px;
   width: 71px;
+}
+
+.logo span {
+  font-weight: 700;
+  font-size: 1.8rem;
 }
 /* --- Buttons --- */
 button {
@@ -854,4 +868,5 @@ details[open] .faq-icon .fa-plus {
     font-size: 10rem;
   }
 }
+
 
