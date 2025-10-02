@@ -128,6 +128,10 @@ p.section-subtitle {
   align-items: center;
   justify-content: space-between;
 }
+.logo img {
+  height: 68px;
+  width: 71px;
+}
 .device-col {
   display: flex;
   flex-direction: column;
