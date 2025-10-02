@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupModal();
   setupTestimonialSlider();
   setupScrollAnimations(); // Initialize scroll animations
+  setupThemeToggle(); 
 
   document
     .getElementById("employer-login-btn")
@@ -30,7 +31,14 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     });
 });
+function setupThemeToggle() {
+  const toggle = document.getElementById("theme-toggle");
+  if (!toggle) return;
 
+  toggle.addEventListener("change", () => {
+    document.body.classList.toggle("employer-theme");
+  });
+}
 function populateTestimonials() {
   const container = document.getElementById("testimonial-list");
   if (!container) return;
@@ -116,3 +124,4 @@ function setupScrollAnimations() {
   const elementsToAnimate = document.querySelectorAll(".animate-on-scroll");
   elementsToAnimate.forEach((el) => observer.observe(el));
 }
+
