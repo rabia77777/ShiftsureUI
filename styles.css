@@ -13,8 +13,16 @@
   --dark-text: #004d4d;
   --light-text: #f9fafb;
   --font-family: "Montserrat", sans-serif;
+
+  /* --- Dynamic Variables --- */
+  --primary-color: var(--primary-teal);
+  --light-bg-color: var(--light-teal-bg);
 }
 
+.employer-theme {
+  --primary-color: var(--primary-blue);
+  --light-bg-color: var(--light-blue-bg);
+}
 * {
   margin: 0;
   padding: 0;
@@ -917,6 +925,7 @@ input:checked + .slider:before {
     font-size: 10rem;
   }
 }
+
 
 
 
