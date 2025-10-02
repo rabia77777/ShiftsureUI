@@ -70,7 +70,10 @@ i {
   opacity: 1;
   transform: translateY(0);
 }
-
+.logo img {
+  height: 68px;
+  width: 71px;
+}
 /* --- Buttons --- */
 button {
   cursor: pointer;
@@ -851,3 +854,4 @@ details[open] .faq-icon .fa-plus {
     font-size: 10rem;
   }
 }
+
