@@ -169,6 +169,12 @@ button i {
   justify-content: space-between;
   align-items: center;
   padding: 1.2rem 2rem;
+  background: rgba(44, 166, 164, 0.25); /* Semi-transparent background */
+  backdrop-filter: blur(10px);          /* This creates the blur! */
+  -webkit-backdrop-filter: blur(10px);  /* For Safari browser support */
+  border-radius: 12px;                  /* Softer, rounded corners */
+  border: 1px solid rgba(255, 255, 255, 0.18); /* A subtle border */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15); /* A soft shadow for depth */
 }
 .logo {
   font-weight: 700;
@@ -851,3 +857,4 @@ details[open] .faq-icon .fa-plus {
     font-size: 10rem;
   }
 }
+
