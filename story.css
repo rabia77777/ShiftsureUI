@@ -1,0 +1,204 @@
+/* --- Global Styles & Variables --- */
+:root {
+  --primary-teal: #2ca6a4; /* Candidate Green */
+  --primary-blue: #2d8cff; /* Employer Blue */
+  --dark-text: #004d4d;
+  --light-text: #f9fafb;
+  --font-family: "Montserrat", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--light-text);
+  color: var(--dark-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h2,
+h3 {
+  font-weight: 700;
+  color: var(--dark-text);
+}
+
+.section {
+  padding: 6rem 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+h2 {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+  font-weight: 900;
+}
+
+p.section-subtitle {
+  max-width: 600px;
+  margin: 0 auto 4rem;
+  color: #555;
+  font-size: 1.1rem;
+}
+
+/* --- Interactive Story Section --- */
+.story-container {
+  display: flex;
+  gap: 2rem;
+  margin-top: 4rem;
+}
+.story-steps {
+  flex: 1;
+  position: relative;
+  text-align: left;
+}
+.story-step {
+  padding: 2rem;
+  min-height: 85vh; /* This creates the scroll length */
+  opacity: 0.3;
+  transition: opacity 0.4s ease;
+  border-left: 3px solid #eee;
+}
+.story-step:last-child {
+  min-height: 0;
+  padding-bottom: 30vh;
+}
+.story-step.is-active {
+  opacity: 1;
+  border-left-color: var(--primary-teal);
+}
+.story-step h3 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+.story-visuals {
+  flex: 1.2;
+  position: sticky;
+  top: 15vh;
+  height: 70vh;
+  max-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.4s ease-in-out;
+}
+.device-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.4s ease-in-out;
+}
+.device-col strong {
+  font-size: 1.1rem;
+  color: #555;
+  font-weight: 600;
+}
+.device-mockup {
+  background: #111;
+  border: 10px solid #000;
+  border-radius: 30px;
+  width: 250px;
+  height: 500px;
+  padding: 5px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  position: relative;
+}
+.device-screen {
+  background-color: #fff;
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  transition: background-image 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  opacity: 0; /* Start hidden, fade in with JS */
+}
+.device-screen.is-visible {
+  opacity: 1;
+}
+.story-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.story-connector .connector-line {
+  width: 2px;
+  height: 80px;
+  background: #ddd;
+}
+.story-connector i {
+  color: #ddd;
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
+  transition: color 0.4s ease, transform 0.4s ease;
+}
+
+/* Focus and Active States for Story */
+.story-visuals.focus-candidate .device-mockup,
+.story-visuals.focus-employer .device-mockup {
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+.story-visuals.focus-candidate .device-mockup.candidate,
+.story-visuals.focus-employer .device-mockup.employer {
+  transform: scale(1.05);
+  opacity: 1;
+}
+.story-visuals.focus-candidate .device-mockup.employer,
+.story-visuals.focus-employer .device-mockup.candidate {
+  transform: scale(0.95);
+  opacity: 0.5;
+}
+.story-connector.is-active i {
+  color: var(--primary-teal);
+  transform: scale(1.2);
+  animation: pulse-connector 1.5s infinite;
+}
+@keyframes pulse-connector {
+  0% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}
+
+/* Responsive for Story Section */
+@media (max-width: 992px) {
+  .story-container {
+    flex-direction: column;
+  }
+  .story-visuals {
+    position: relative;
+    top: 0;
+    height: auto;
+    margin-bottom: 3rem;
+  }
+  .story-step {
+    min-height: auto;
+    margin-bottom: 3rem;
+  }
+}
+@media (max-width: 768px) {
+  .device-mockup {
+    width: 150px;
+    height: 300px;
+    border-radius: 20px;
+    border-width: 8px;
+  }
+}
